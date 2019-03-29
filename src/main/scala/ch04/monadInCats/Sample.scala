@@ -18,6 +18,10 @@ object Sample {
 
     val fm = Monad[Future]
 
+    val future: Future[Int] = fm.flatMap(fm.pure(1))(x => fm.pure(x + 2))
+
+    Await.result(future, 10.second) // TODO
+
   }
 
 }
