@@ -10,6 +10,8 @@ trait Monoid[A] extends Semigroup[A] {
 
 object Monoid {
 
+  def apply[A](implicit monoid: Monoid[A]): Monoid[A] = monoid
+
   implicit val booleanAndMonoid: Monoid[Boolean] = new Monoid[Boolean] {
 
     def empty: Boolean = true
@@ -31,7 +33,7 @@ object Monoid {
 
     override def empty: Boolean = false
 
-    override def combine(x: Boolean, y: Boolean): Boolean = ???
+    override def combine(x: Boolean, y: Boolean): Boolean = (x && !y) || (!x && y)
 
   }
 
@@ -40,11 +42,8 @@ object Monoid {
 
     override def empty: Boolean = true
 
-    override def combine(x: Boolean, y: Boolean): Boolean = ???
+    override def combine(x: Boolean, y: Boolean): Boolean = (x && y) || (!x && !y) // (!x || y) && (x || !y)
 
   }
 
-
-  def apply[A](implicit monoid: Monoid[A]) =
-    monoid
 }
