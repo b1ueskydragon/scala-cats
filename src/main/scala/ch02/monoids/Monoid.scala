@@ -55,3 +55,14 @@ object Monoid {
   }
 
 }
+
+object Semigroup {
+
+  def apply[A](implicit semigroup: Semigroup[A]): Semigroup[A] = semigroup
+
+  // this forms a semigroup, but doesn't form a monoid
+  // because it has no identity element.
+  implicit def setIntersectionSemigroup[A]: Semigroup[Set[A]] =
+    (a: Set[A], b: Set[A]) => a intersect b
+
+}
