@@ -1,4 +1,4 @@
-package ch04.monadInCats
+package ch04.cats
 
 import cats.Monad
 import cats.instances.vector._
