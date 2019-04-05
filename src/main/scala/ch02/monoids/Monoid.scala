@@ -54,14 +54,17 @@ object Monoid {
 
   }
 
-  // symmetric difference
-  implicit def symDiffMonoid[A]: Monoid[Set[A]] = new Monoid[Set[A]] {
+  // ambiguous implicit values
+  // 上記と下記のうち, どの Set[A] type の combine を呼んでいるのか compiler に伝わらない
 
-    override def empty: Set[A] = Set.empty
-
-    override def combine(x: Set[A], y: Set[A]): Set[A] = (x diff y) ++ (y diff x)
-
-  }
+  //  // symmetric difference
+  //  implicit def symDiffMonoid[A]: Monoid[Set[A]] = new Monoid[Set[A]] {
+  //
+  //    override def empty: Set[A] = Set.empty
+  //
+  //    override def combine(x: Set[A], y: Set[A]): Set[A] = (x diff y) ++ (y diff x)
+  //
+  //  }
 
 }
 
