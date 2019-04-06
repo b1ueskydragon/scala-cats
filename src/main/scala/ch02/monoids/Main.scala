@@ -1,5 +1,7 @@
 package ch02.monoids
 
+import ch02.cats.SuperAdder
+
 object Main {
 
   def main(args: Array[String]): Unit = {
@@ -15,6 +17,14 @@ object Main {
     val intSetSemigroup = Semigroup[Set[Int]]
     val res02 = intSetSemigroup.combine(Set(1, 2), Set(2, 3))
     println(res02)
+
+    val superAdderInt = SuperAdder[Int]
+    val res03 = superAdderInt.add(List(1, 2, 3, 4))
+    println(res03)
+
+    val superAdderIntOpt = SuperAdder[Option[Int]]
+    val res04 = superAdderIntOpt.add(List(Some(100), None, Some(200)))
+    println(res04)
 
   }
 
