@@ -4,20 +4,20 @@ package ch02.cats
 import cats.kernel.Monoid
 import cats.syntax.semigroup._
 
-trait SuperAdder[A] {
-  def id(implicit monoid: Monoid[A]): A
+trait SuperAdder {
 
-  def add(items: List[A])(implicit monoid: Monoid[A]): A
+  def add[A: Monoid](items: List[A]): A
+
 }
 
 object SuperAdder {
-  def apply[A](implicit superAdder: SuperAdder[A]): SuperAdder[A] = superAdder
+  def apply[A](implicit superAdder: SuperAdder): SuperAdder = superAdder
 
-  implicit def addAll[A]: SuperAdder[A] = new SuperAdder[A] {
-    override def id(implicit monoid: Monoid[A]): A = Monoid[A].empty
+  implicit def addAll: SuperAdder = new SuperAdder {
 
-    override def add(items: List[A])(implicit monoid: Monoid[A]): A =
-      items.foldLeft(id)(_ |+| _)
+    override def add[A: Monoid](items: List[A]): A =
+      items.foldLeft(Monoid[A].empty)(_ |+| _)
+
   }
 
 }

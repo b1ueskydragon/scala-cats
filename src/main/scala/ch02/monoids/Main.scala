@@ -4,6 +4,7 @@ import ch02.cats.SuperAdder
 
 import cats.instances.int._
 import cats.instances.option._
+import cats.instances.string._
 
 object Main {
 
@@ -28,6 +29,10 @@ object Main {
     val superAdderIntOpt = SuperAdder[Option[Int]]
     val res04 = superAdderIntOpt.add(List(Some(100), None, Some(200)))
     println(res04)
+
+    val superAdderStr = SuperAdder[String]
+    val res05 = superAdderStr.add(List("here", "'s ", "my pony"))
+    println(res05)
 
   }
 
