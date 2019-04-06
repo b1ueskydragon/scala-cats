@@ -26,6 +26,7 @@ object Main {
     val res03 = superAdderInt.add(List(1, 2, 3, 4))
     println(res03)
 
+    // include None
     val superAdderIntOpt = SuperAdder[Option[Int]]
     val res04 = superAdderIntOpt.add(List(Some(100), None, Some(200)))
     println(res04)
@@ -33,6 +34,11 @@ object Main {
     val superAdderStr = SuperAdder[String]
     val res05 = superAdderStr.add(List("here", "'s ", "my pony"))
     println(res05)
+
+    // exclude None
+    val superAdderIntOpt_ = SuperAdder[Option[Int]]
+    val res06 = superAdderIntOpt_.add(List(Some(100), Some(200)))
+    println(res06)
 
   }
 
