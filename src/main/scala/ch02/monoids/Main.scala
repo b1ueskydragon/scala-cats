@@ -2,6 +2,9 @@ package ch02.monoids
 
 import ch02.cats.SuperAdder
 
+import cats.instances.int._
+import cats.instances.option._
+
 object Main {
 
   def main(args: Array[String]): Unit = {
