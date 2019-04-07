@@ -1,7 +1,6 @@
 package ch02.monoids
 
-import ch02.cats.SuperAdder
-
+import ch02.cats.{Order, SuperAdder}
 import cats.instances.int._
 import cats.instances.option._
 import cats.instances.string._
@@ -39,6 +38,11 @@ object Main {
     val superAdderIntOpt_ = SuperAdder[Option[Int]]
     val res06 = superAdderIntOpt_.add(List(Some(100), Some(200)))
     println(res06)
+
+    // use a custom instance of monoid
+    val superAddOrder = SuperAdder[Order]
+    val res07 = superAddOrder.add(List(Order(100.0, 5.0), Order(11.0, 6.0)))(superAddOrder.monoid)
+    println(res07)
 
   }
 

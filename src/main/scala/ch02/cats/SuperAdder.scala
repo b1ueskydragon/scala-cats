@@ -8,6 +8,17 @@ trait SuperAdder[A] {
 
   def add(items: List[A])(implicit monoid: Monoid[A]): A
 
+  // define a monoid instance for `Order`
+  // define in trait ?
+  implicit val monoid: Monoid[Order] = new Monoid[Order] {
+
+    override def empty: Order = Order(0d, 0d)
+
+    override def combine(x: Order, y: Order): Order =
+      Order(x.totalCost + y.totalCost, x.quantity + y.quantity)
+
+  }
+
 }
 
 object SuperAdder {
@@ -18,16 +29,6 @@ object SuperAdder {
     // monoid instance to generic
     override def add(items: List[A])(implicit monoid: Monoid[A]): A =
       items.foldRight(monoid.empty)(_ |+| _)
-
-  }
-
-  // define a monoid instance for `Order`
-  implicit val monoid: Monoid[Order] = new Monoid[Order] {
-
-    override def empty: Order = Order(0d, 0d)
-
-    override def combine(x: Order, y: Order): Order =
-      Order(x.totalCost + y.totalCost, x.quantity + y.quantity)
 
   }
 
