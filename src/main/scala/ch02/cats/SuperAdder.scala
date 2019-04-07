@@ -21,4 +21,17 @@ object SuperAdder {
 
   }
 
+  // define a monoid instance for `Order`
+  implicit val monoid: Monoid[Order] = new Monoid[Order] {
+
+    override def empty: Order = Order(0d, 0d)
+
+    override def combine(x: Order, y: Order): Order =
+      Order(x.totalCost + y.totalCost, x.quantity + y.quantity)
+
+  }
+
 }
+
+case class Order(totalCost: Double, quantity: Double)
+
