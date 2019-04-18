@@ -1,7 +1,5 @@
 package ch03.cats
 
-import scala.language.higherKinds // enable
-
 /** Identity:
   * calling map with the identity function == doing nothing
   * | fa.map(a => a) == fa
