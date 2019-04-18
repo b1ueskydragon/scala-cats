@@ -16,6 +16,11 @@ object Example {
 
   val funcB: Double => Double = (y: Double) => y * 2
 
+  // use map, append another operation to the chain.
+  // run in sequence (pass an argument to the final function).
+  val funcZ: Int => String = ((x: Int) => x.toDouble).map(x => x * 123).map(x => x + "!")
+
+
   def main(args: Array[String]): Unit = {
     val v: Int = 1
 
