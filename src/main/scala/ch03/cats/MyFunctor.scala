@@ -11,6 +11,6 @@ package ch03.cats
   * @tparam F type constructor
   *           (take a single parameter and produce type)
   */
-trait Functor[F[_]] {
+trait MyFunctor[F[_]] {
   def map[A, B](fa: F[A])(f: A => B): F[B]
 }
