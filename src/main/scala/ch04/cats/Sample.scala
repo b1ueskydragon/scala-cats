@@ -7,10 +7,17 @@ import cats.syntax.flatMap._
 import cats.syntax.functor._
 
 import scala.concurrent.ExecutionContext.Implicits.global // Bringing the ExecutionContext into scope
-import scala.concurrent.duration._
-import scala.concurrent.{Future, _}
+import scala.concurrent.Future
 
 object Sample {
+
+  def dupliAndCarry(a: Vector[Int]): Vector[Int] = Monad[Vector].flatMap(a)(x => Vector(x, x * 10))
+
+  // needs an ExecutionContext
+  private val futureMonad = Monad[Future]
+
+  def future(a: Int): Future[Int] =
+    futureMonad.flatMap(futureMonad.pure(a))(x => futureMonad.pure(x + 2))
 
   // a generic function
   // not explicit type that is like Option or List
@@ -26,17 +33,5 @@ object Sample {
       x <- a
       y <- b
     } yield x * x + y * y
-
-  def main(args: Array[String]): Unit = {
-
-    val res = Monad[Vector].flatMap(Vector(1, 2, 3))(a => Vector(a, a * 10))
-    println(res) // Vector(1, 10, 2, 20, 3, 30)
-
-    val fm = Monad[Future] // needs an ExecutionContext
-    val future: Future[Int] = fm.flatMap(fm.pure(1))(x => fm.pure(x + 2))
-    val res01 = Await.result(future, Duration.Inf)
-    println(res01)
-
-  }
 
 }
