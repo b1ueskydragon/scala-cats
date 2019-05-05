@@ -69,4 +69,17 @@ class SampleSpec extends FlatSpec {
 
   }
 
+  "sumSquareFlatMap" should "allow to abstract over monadic code" in {
+    // Id allows to call monadic method using plain values
+    import cats.Id
+
+    val a: Id[Int] = 2
+    val b: Id[Int] = 5
+
+    val expected: Int = 29 // Id[A] = A
+
+    assert(expected == sumSquareFlatMap(a, b))
+
+  }
+
 }
