@@ -11,8 +11,52 @@ class MonadicSecretIdentitiesSpec extends FlatSpec {
 
     val expected = value
 
-    assert(expected == pure(value))
+    val actual = pure(value)
+
+    assert(expected == actual)
 
   }
+
+  "map" should "return itself after applying function" in {
+
+    val value = 100
+
+    def f(x: Int) = x * 3.14
+
+    val expected = f(value)
+
+    val actual = map(value)(f) //  map(value)(x => f(x))
+
+    assert(expected == actual)
+
+  }
+
+//  "flatMap" should "return a plain value after applying function" in {
+//
+//    val value = 100
+//
+//    def f(x: Int) = x * 3.14
+//
+//    val expected = pure(f(value))
+//
+//    val actual = flatMap(value)(f)
+//
+//    assert(expected == actual)
+//
+//  }
+//
+//  "map" should "be defined using flatMap and pure" in {
+//
+//    val value = 100
+//
+//    def f(x: Int) = x * 3.14
+//
+//    val expected = map(value)(f)
+//
+//    val actual = flatMap(value)(pure(f(_)))
+//
+//    assert(expected == actual)
+//
+//  }
 
 }
